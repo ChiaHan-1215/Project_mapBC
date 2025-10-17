@@ -96,7 +96,7 @@ for ( i in list_TCGA){
   colnames(df) <- TCGAIDmatch$tcga.tcga_barcode[match(colnames(df), TCGAIDmatch$external_id)]
   
   # TMEM129 region in hg38
-  # chr4:1713952-1723323
+  # chr4:1715712-1721408
   
   df$POS <- rownames(df)
   df <- df[which(grepl("chr4:",df$POS)),]
