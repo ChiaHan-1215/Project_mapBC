@@ -75,11 +75,11 @@ TCGA <- subset(human_projects, file_source == "tcga" & project_type == "data_sou
 list_TCGA <- TCGA$project
 
 
-for ( i in list_TCGA){
+# for ( i in list_TCGA){
   
   df <- data.frame()
   
-  # i <- "BLCA"
+  i <- "BLCA"
   target_tissue  <- TCGA %>% filter(project == i)
   
   rse_jxn_b <- create_rse(
@@ -138,9 +138,12 @@ for ( i in list_TCGA){
   df_chr4.t[] <- lapply(df_chr4.t[], as.numeric)
   df_chr4.t <- df_chr4.t %>% mutate(TCGA_ID=rownames(df_chr4.t),.before = 1)
   
-  #write.table(df_chr4.t,paste0("~/Desktop/chr15_CHRNA5_bladder_project/Recount3_for_GTEx_and_TCGA/TCGA_JC/",i,"_C5iso_jc.csv"),col.names = T,row.names = F,sep = ',',quote = F)
+  write.table(df_chr4.t,paste0("~/Desktop/chr15_CHRNA5_bladder_project/Recount3_for_GTEx_and_TCGA/TCGA_JC/",i,"_C5iso_jc.csv"),col.names = T,row.names = F,sep = ',',quote = F)
   
-}
+# }
+
+
+
 
 
 
