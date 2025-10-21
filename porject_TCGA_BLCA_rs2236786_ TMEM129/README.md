@@ -143,6 +143,17 @@ list_TCGA <- TCGA$project
 # }
 
 
+## To do list
+
+- finding TPM of TCGA/GTEx of TMEM129 isoform, can we use UCSC Xena data we dowlaoded for TERT paper?
+  The locatation of file:
+`/Volumes/ifs/DCEG/Branches/LTG/Prokunina/TCGA_data/Original source data Expression/UCSC Toil RNA-seq Recompute`
+
+- IMVIGOR210 dataset
+We have raw count, patient info.
+What data should we extract next?
+
+
 
 
 
