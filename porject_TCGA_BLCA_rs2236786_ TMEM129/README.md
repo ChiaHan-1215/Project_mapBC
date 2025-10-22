@@ -161,7 +161,8 @@ list_TCGA <- TCGA$project
  We have raw count, patient info.
 **Can also get Z-score**
 
-
+**check if we had most of file related to TCGA immune https://docs.google.com/document/d/16ikNbWpkIi_oTR3mYVu-Mle8fyLxxcgV/edit**
+- if not, download file in T-drive and make note that file is downloaded
 
 
 
