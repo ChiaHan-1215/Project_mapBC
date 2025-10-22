@@ -159,8 +159,7 @@ list_TCGA <- TCGA$project
 
 - IMVIGOR210 dataset
 We have raw count, patient info.
-
-What data should we extract next?
+**Can also get Z-score**
 
 
 
