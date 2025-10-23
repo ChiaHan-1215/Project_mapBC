@@ -162,9 +162,18 @@ list_TCGA <- TCGA$project
 **Can also get Z-score**
 
 **check if we had most of file related to TCGA immune https://docs.google.com/document/d/16ikNbWpkIi_oTR3mYVu-Mle8fyLxxcgV/edit**
+
+the link: https://gdc.cancer.gov/about-data/publications/panimmune
+
 - if not, download file in T-drive and make note that file is downloaded
+```
+# In Biowulf
+
+ml gdc-client
+gdc-client download -t token.txt file_uuid/id
 
 
+```
 
 
 
