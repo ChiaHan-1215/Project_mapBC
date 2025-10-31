@@ -157,26 +157,29 @@ list_TCGA <- TCGA$project
   `/Volumes/ifs/DCEG/Branches/LTG/Prokunina/GTEx_data/GTEx_analysis_v10`
 
 
- - IMVIGOR210 dataset
- We have raw count, patient info.
-**Can also get Z-score**
 
 **check if we had most of file related to TCGA immune https://docs.google.com/document/d/16ikNbWpkIi_oTR3mYVu-Mle8fyLxxcgV/edit**
 
 the link: https://gdc.cancer.gov/about-data/publications/panimmune
 
 - if not, download file in T-drive and make note that file is downloaded
+
 ```
 # In Biowulf
 
 ml gdc-client
 gdc-client download -t token.txt file_uuid/id
 
-
 ```
+## Once dowloaded all MHC related file, see what's in the data and organizing into masterfile
+
+- **IMVIGOR210 dataset**
+
+## make markdown or notes for how we download and get z-score/raw count etc from IMVagor210 dataset 
+
+ 
 
 
 
 
-```
 
