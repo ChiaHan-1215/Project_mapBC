@@ -48,7 +48,7 @@ names(df_sub)[3] <- "rs2236786_chr4_1717567"
 ```
 
 
-**Extract junction count of TMEM129 from Recount3 package**
+**Extract junction count of TMEM129 and FGFR3 from Recount3 package**
 
 - Need to run in Biowulf
 
