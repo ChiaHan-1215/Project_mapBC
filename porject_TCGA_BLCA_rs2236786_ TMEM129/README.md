@@ -48,9 +48,17 @@ names(df_sub)[3] <- "rs2236786_chr4_1717567"
 ```
 
 
-**Extract junction count of TMEM129 and FGFR3 from Recount3 package**
+**Extract junction count of TMEM129 from Recount3 package**
+
+**Updated code: `Extrac_junction_count_from_Recount3_with_exon_region.R`**
 
 - Need to run in Biowulf
+
+- add more details of how to get each exons region in order to get intron region
+  
+- get all the isofroms junction region and align it to the Recount3 region
+
+
 
 ```R
 
