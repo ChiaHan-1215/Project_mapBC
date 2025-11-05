@@ -3,8 +3,12 @@
 **The script is still under develope and need to recheck some value 
 
 For one of the paper method they mentioned: 
+
 ```
-we obtained the data from GSE87304 using the GEOquery R package (v.2.54.1), reprocessed the CEL files using the frma R package (v1.40.0),  annotated using R package ensembledb (c. 2.12.1, Ensemble 99) and applied a log2 transformation.
+we obtained the data from GSE87304 using the GEOquery R package (v.2.54.1),
+reprocessed the CEL files using the frma R package (v1.40.0),
+annotated using R package ensembledb (c. 2.12.1, Ensemble 99) and applied a log2 transformation.
+
 ```
 
 We need to download the raw CEL file and reprocess it to get the exon value.
