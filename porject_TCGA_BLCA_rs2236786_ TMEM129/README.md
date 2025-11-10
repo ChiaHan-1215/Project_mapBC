@@ -6,11 +6,7 @@
 
 `Extrac_junction_count_from_Recount3_with_exon_region.R` -  How to extract junction count from target gene, need to run in Biowulf. Add more details of how to get each exons region in order to get intron region. Get all the isofroms junction region and align it to the Recount3 region
 
-
-- **IMVIGOR210 dataset**
-
-## make markdown or notes for how we download and get z-score/raw count etc from IMVagor210 dataset 
-
+`IMVagor210_data_processing.md` - Markdown or notes for how we download and get z-score/raw count etc from IMVagor210 dataset 
 
 
 
