@@ -11,7 +11,17 @@
 
 ## Code: 
 
-`Retrive_region.md` How to retrive region from HPRC/CARD`
+`Retrive_region.md` How to retrive region from HPRC/CARD
+
+`Task1_RetrieveGenomeRegion...`
+
+`Task2_RetrieveGenomeRegion...`
 
 
- THe current working dic is in my Biowulf, will update later `/data/leec20/GWAS_COVNET_related`
+
+
+
+## Note:
+
+The current working dic is in my Biowulf, will update later `/data/leec20/GWAS_COVNET_related`
+
