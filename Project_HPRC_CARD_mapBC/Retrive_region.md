@@ -25,4 +25,4 @@ Step 2 is mainly alignment, the script to follow is `/data/Prokunina_Group/Genom
 
 ### Step3 
 
-Calling variants, still under Oscar constructiuon
+Calling variants
