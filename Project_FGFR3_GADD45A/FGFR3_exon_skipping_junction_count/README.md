@@ -102,22 +102,35 @@ df.sub <- df.sub[,c(1,3,4,7,9:ncol(df.sub))]
 #df.sub <- df.sub %>% filter(RT4_2D > 1)
 # Now have to determine which region is skipling 
 
-
 # make tag
 df.sub$jct_region <- paste0(df.sub$Site1_chr,":",df.sub$Site1_location,"-",df.sub$Site2_location) 
 
 # select to keep
 # chr4:1728531-1803335 <- FGFR3_TACC3 fusion?
-
-
-
+# chr4:1801536-1801620 <- ex5-ex6
 
 df.sub$jct_tag <- car::recode("")
 
 
+### Get the exon corrdine ######### 
+
+library(rtracklayer)
+library(dplyr)
+
+setwd('/Volumes/ifs/DCEG/Branches/LTG/Prokunina/CCLE and other RNA-seq Bam files/SH-SY5Y_short_read_RNA_seq_bams_hg38/REFERENC/')
 
 
+gtf <- import('gencode.v39.annotation.gtf')      # Use your downloaded GTF file
 
+genes_of_interest <- c("FGFR3")    # Replace with your gene list
 
+# Subset exons for your genes
+exons <- subset(gtf, type == "exon" & gene_name %in% genes_of_interest)
+
+#exon_df <- as.data.frame(exons)[, c("seqnames", "start", "end", "gene_name", "exon_id", "exon_number")]
+exon_df <- as.data.frame(exons)
+# just get protein coding exon only
+exon_df <- exon_df[!is.na(exon_df$ccdsid),]
+exon_df <- exon_df[, c("seqnames", "start", "end", "gene_name","transcript_name", "exon_id", "exon_number")]
 ```
 
