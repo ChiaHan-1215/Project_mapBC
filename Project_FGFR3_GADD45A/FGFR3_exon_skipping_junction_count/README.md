@@ -113,24 +113,72 @@ df.sub$jct_tag <- car::recode("")
 
 
 ### Get the exon corrdine ######### 
+# Should follow this https://github.com/ChiaHan-1215/Project_mapBC/blob/main/porject_TCGA_BLCA_rs2236786_%20TMEM129/Extract_junction_count_from_Recount3_with_exon_region_Gene_forward_strand.R
 
 library(rtracklayer)
 library(dplyr)
 
-setwd('/Volumes/ifs/DCEG/Branches/LTG/Prokunina/CCLE and other RNA-seq Bam files/SH-SY5Y_short_read_RNA_seq_bams_hg38/REFERENC/')
+gtf <- import('gencode.v39.annotation.gtf')     
+
+# c("FGFR3")
+
+# 5 to 3 ->
+genes_of_interest <-c("FGFR3")
+# 3 to 5 <-
+# genes_of_interest <-c("FAM53A","SLBP","TMEM129")
 
 
-gtf <- import('gencode.v39.annotation.gtf')      # Use your downloaded GTF file
-
-genes_of_interest <- c("FGFR3")    # Replace with your gene list
+# Since there's difference of 5' to 3' gene and 3' to 5' gene 
+# so need to seperated by gene direct, the +1 -1 base for this code is for FGFR3,TACC3
 
 # Subset exons for your genes
 exons <- subset(gtf, type == "exon" & gene_name %in% genes_of_interest)
-
 #exon_df <- as.data.frame(exons)[, c("seqnames", "start", "end", "gene_name", "exon_id", "exon_number")]
 exon_df <- as.data.frame(exons)
 # just get protein coding exon only
-exon_df <- exon_df[!is.na(exon_df$ccdsid),]
+#exon_df <- exon_df[!is.na(exon_df$ccdsid),]
 exon_df <- exon_df[, c("seqnames", "start", "end", "gene_name","transcript_name", "exon_id", "exon_number")]
+exon_df$location <- paste0(exon_df$seqnames,':',exon_df$start,"-",exon_df$end)
+
+# exon_df.u <- exon_df[!duplicated(exon_df[, c("exon_id", "location")]), ]
+
+iso_list <- exon_df$transcript_name %>% unique() %>% sort()
+
+jct_per_iso <- data.frame()
+
+for (k in iso_list){
+  
+  # k <- iso_list[2]
+  exon_df.u <- exon_df %>% filter(transcript_name == k)
+  
+  jct_df <- exon_df.u %>%
+    arrange(transcript_name, as.numeric(exon_number)) %>%
+    group_by(gene_name, transcript_name, seqnames) %>%
+    mutate(
+      next_start = lead(start),
+      next_exon  = lead(exon_number)
+    ) %>%
+    filter(!is.na(next_start), as.numeric(next_exon) == as.numeric(exon_number) + 1) %>%
+    ungroup() %>%    
+    transmute(
+      gene_name,
+      transcript_name,
+      jct_label = paste0("jct_ex", exon_number, "_ex", next_exon),
+      location = paste0(seqnames, ":", end ,"-", next_start )
+    ) 
+  jct_per_iso <- rbind(jct_per_iso,jct_df)
+  
+  
+  
+  
+}
+
+
+jct_per_iso <- jct_per_iso[!duplicated(jct_per_iso$location),]
+
+# Since the featurecount output kind of -1 with all start and end. need to md based on it 
+
+
+
 ```
 
