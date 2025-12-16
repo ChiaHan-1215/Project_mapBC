@@ -77,28 +77,45 @@ The output named `xxx.jcounts` is our input for further analysis in Rstudio
 
 ```R
 library(dplyr)
+library(tidyr)
+library(car)
 
 
 setwd('/Volumes/ifs/DCEG/Branches/LTG/Prokunina/Parse_scRNA-seq/RT4_2D3D_featurecunt/')
 
-df <- read.delim('Test.jcounts',header = T)
+df <- read.delim('output.jcounts',header = T)
 head(df)
 
 # chr4 and FGFR3 
 # filter chr4:1801409-1804912
 
-df_complete <- df %>%
+df.sub <- df %>%
   filter(
     (Site1_chr == 'chr4' & Site1_location >= 1801409 & Site1_location <= 1804912) |
       (Site2_chr == 'chr4' & Site2_location >= 1801409 & Site2_location <= 1804912)
   )
 
 
-df_complete <- df_complete[,c(1,3,4,7,9)]
-names(df_complete)[5] <- "RT4_2D"
+df.sub <- df.sub[,c(1,3,4,7,9:ncol(df.sub))]
+#names(df.sub)[5] <- "RT4_2D"
 # filter > 1 read 
-df_complete <- df_complete %>% filter(RT4_2D > 1)
+#df.sub <- df.sub %>% filter(RT4_2D > 1)
 # Now have to determine which region is skipling 
+
+
+# make tag
+df.sub$jct_region <- paste0(df.sub$Site1_chr,":",df.sub$Site1_location,"-",df.sub$Site2_location) 
+
+# select to keep
+# chr4:1728531-1803335 <- FGFR3_TACC3 fusion?
+
+
+
+
+df.sub$jct_tag <- car::recode("")
+
+
+
 
 
 
