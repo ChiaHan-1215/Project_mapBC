@@ -43,3 +43,64 @@ done
 
 **Analysis code:**  
 GitHub repository: [SHSY5Y_featurecount_CHRNA5.R](https://github.com/ChiaHan-1215/SH-SY5Y_cell_line_RNA_seq_with_long_read/blob/main/SHSY5Y_featurecount_CHRNA5.R)
+
+
+
+---------
+---------
+
+
+## Date: 12/16/2025
+## Test RT4 BAM file
+
+```
+# region of interest,hg38, FGFR3 exon skipping region
+chr4:1801409-1804912
+
+# The saf file:
+# FGFR3_region.saf
+
+FGFR3_skip  chr4  1801409  1804912  +
+
+```
+The featurecount command: 
+
+```
+ml slurm/
+ml subread/
+
+ featureCounts -t 12 -a FGFR3_region.saf  -F SAF -o output input.bam --splitOnly -J 
+
+```
+
+The output named `xxx.jcounts` is our input for further analysis in Rstudio
+
+```R
+library(dplyr)
+
+
+setwd('/Volumes/ifs/DCEG/Branches/LTG/Prokunina/Parse_scRNA-seq/RT4_2D3D_featurecunt/')
+
+df <- read.delim('Test.jcounts',header = T)
+head(df)
+
+# chr4 and FGFR3 
+# filter chr4:1801409-1804912
+
+df_complete <- df %>%
+  filter(
+    (Site1_chr == 'chr4' & Site1_location >= 1801409 & Site1_location <= 1804912) |
+      (Site2_chr == 'chr4' & Site2_location >= 1801409 & Site2_location <= 1804912)
+  )
+
+
+df_complete <- df_complete[,c(1,3,4,7,9)]
+names(df_complete)[5] <- "RT4_2D"
+# filter > 1 read 
+df_complete <- df_complete %>% filter(RT4_2D > 1)
+# Now have to determine which region is skipling 
+
+
+
+```
+
